@@ -183,6 +183,7 @@ type RunOptions struct {
 	X11ClassName             string
 	X11InstanceName          string
 	StrictContextRestoration bool
+	PlaceHTMLElement         string
 }
 
 // InitialWindowPosition returns the position for centering the given second width/height pair within the first width/height pair.

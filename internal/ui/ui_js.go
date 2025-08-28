@@ -488,38 +488,36 @@ func (u *UserInterface) init() error {
 
 	// Adjust the initial scale to 1.
 	// https://developer.mozilla.org/en/docs/Mozilla/Mobile/Viewport_meta_tag
-	meta := document.Call("createElement", "meta")
-	meta.Set("name", "viewport")
-	meta.Set("content", "width=device-width, initial-scale=1")
-	document.Get("head").Call("appendChild", meta)
+	// meta := document.Call("createElement", "meta")
+	// meta.Set("name", "viewport")
+	// meta.Set("content", "width=device-width, initial-scale=1")
+	// document.Get("head").Call("appendChild", meta)
 
 	canvas = document.Call("createElement", "canvas")
 	canvas.Set("width", 16)
 	canvas.Set("height", 16)
 
-	document.Get("body").Call("appendChild", canvas)
+	// htmlStyle := document.Get("documentElement").Get("style")
+	// htmlStyle.Set("height", "100%")
+	// htmlStyle.Set("margin", "0")
+	// htmlStyle.Set("padding", "0")
 
-	htmlStyle := document.Get("documentElement").Get("style")
-	htmlStyle.Set("height", "100%")
-	htmlStyle.Set("margin", "0")
-	htmlStyle.Set("padding", "0")
+	// bodyStyle := document.Get("body").Get("style")
+	// bodyStyle.Set("backgroundColor", "#000")
+	// bodyStyle.Set("height", "100%")
+	// bodyStyle.Set("margin", "0")
+	// bodyStyle.Set("padding", "0")
 
-	bodyStyle := document.Get("body").Get("style")
-	bodyStyle.Set("backgroundColor", "#000")
-	bodyStyle.Set("height", "100%")
-	bodyStyle.Set("margin", "0")
-	bodyStyle.Set("padding", "0")
-
-	canvasStyle := canvas.Get("style")
-	canvasStyle.Set("width", "100%")
-	canvasStyle.Set("height", "100%")
-	canvasStyle.Set("margin", "0")
-	canvasStyle.Set("padding", "0")
-	canvasStyle.Set("display", "block")
+	// canvasStyle := canvas.Get("style")
+	// canvasStyle.Set("width", "100%")
+	// canvasStyle.Set("height", "100%")
+	// canvasStyle.Set("margin", "0")
+	// canvasStyle.Set("padding", "0")
+	// canvasStyle.Set("display", "block")
 
 	// Make the canvas focusable.
-	canvas.Call("setAttribute", "tabindex", 1)
-	canvas.Get("style").Set("outline", "none")
+	// canvas.Call("setAttribute", "tabindex", 1)
+	// canvas.Get("style").Set("outline", "none")
 
 	u.setCanvasEventHandlers(canvas)
 
@@ -770,6 +768,8 @@ func (u *UserInterface) initOnMainThread(options *RunOptions) error {
 	u.setRunning(true)
 
 	u.hiDPIEnabled = !options.DisableHiDPI
+
+	document.Call("querySelector", options.PlaceHTMLElement).Call("appendChild", canvas)
 
 	if u.shouldFocusFirst(options) {
 		canvas.Call("focus")

@@ -310,6 +310,8 @@ type RunGameOptions struct {
 
 	// X11InstanceName is an instance name in the ICCCM WM_CLASS window property.
 	X11InstanceName string
+
+	PlaceHTMLElement string
 }
 
 // RunGameWithOptions starts the main loop and runs the game with the specified options.
@@ -693,6 +695,7 @@ func toUIRunOptions(options *RunGameOptions) *ui.RunOptions {
 	const (
 		defaultX11ClassName    = "Ebitengine-Application"
 		defaultX11InstanceName = "ebitengine-application"
+		defaultHTMLElement     = "body"
 	)
 
 	if options == nil {
@@ -701,6 +704,7 @@ func toUIRunOptions(options *RunGameOptions) *ui.RunOptions {
 			ScreenTransparent: screenTransparent.Load(),
 			X11ClassName:      defaultX11ClassName,
 			X11InstanceName:   defaultX11InstanceName,
+			PlaceHTMLElement:  defaultHTMLElement,
 		}
 	}
 
@@ -709,6 +713,9 @@ func toUIRunOptions(options *RunGameOptions) *ui.RunOptions {
 	}
 	if options.X11InstanceName == "" {
 		options.X11InstanceName = defaultX11InstanceName
+	}
+	if options.PlaceHTMLElement == "" {
+		options.PlaceHTMLElement = defaultHTMLElement
 	}
 
 	// ui.RunOptions.StrictContextRestoration is not used so far (#3098).
@@ -744,6 +751,7 @@ func toUIRunOptions(options *RunGameOptions) *ui.RunOptions {
 		ApplePressAndHoldEnabled: options.ApplePressAndHoldEnabled,
 		X11ClassName:             options.X11ClassName,
 		X11InstanceName:          options.X11InstanceName,
+		PlaceHTMLElement:         options.PlaceHTMLElement,
 	}
 }
 
